@@ -9,7 +9,7 @@ import {
   UserRejectedRequestError as UserRejectedRequestErrorWalletConnect,
   WalletConnectConnector,
 } from '@web3-react/walletconnect-connector'
-import { connectorLocalStorageKey, ConnectorNames } from '@pancakeswap-libs/uikit'
+import { connectorLocalStorageKey, ConnectorNames } from '../components/uikit'
 import useToast from 'hooks/useToast'
 import { connectorsByName } from 'connectors'
 
@@ -18,8 +18,10 @@ const useAuth = () => {
   const { toastError } = useToast()
 
   const login = useCallback((connectorID: ConnectorNames) => {
+
     const connector = connectorsByName[connectorID]
     if (connector) {
+
       activate(connector, async (error: Error) => {
         window.localStorage.removeItem(connectorLocalStorageKey)
         if (error instanceof UnsupportedChainIdError) {
